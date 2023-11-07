@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# a non-aggregated index where you can get all the relevant fields at once
+GET     /                           controllers.MainController.index
+
+# aggregation endpoints - these use all the data by default
+GET     /by-state                   controllers.MainController.byState
+
+# calculates _extremely_ basic statistics on for the field selected
+# valid values do need to be preselected at compile time via inclusion in the RelevantFields object
+GET     /stats-by-field/:selectedField                   controllers.MainController.statsByField(selectedField: String)
+
+# this essentially functions as a group-by, grouping by the first parameter to provide stats on the second param
+GET     /agg-by-field/:aggregationField/:aggregatedField                   controllers.MainController.AggregateByField(aggregationField: String, aggregatedField: String)
